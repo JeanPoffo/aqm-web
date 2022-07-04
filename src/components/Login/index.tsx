@@ -35,6 +35,7 @@ export default function Login({ visible, setVisible }: LoginProps) {
 
     if (loginSuccess) {
       setVisible(false);
+      window.location.reload();
     } else {
       message.warning('Login e/ou Senha Incorretos!');
     }

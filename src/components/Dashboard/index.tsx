@@ -1,5 +1,6 @@
 import {
   ReactNode,
+  useCallback,
   useMemo,
   useState,
 } from 'react';
@@ -36,6 +37,11 @@ export default function Dashboard({ children }: Properties) {
 
   const [showLogin, setShowLogin] = useState<boolean>(false);
 
+  const onClickSignOut = useCallback(() => {
+    signOut();
+    window.location.reload();
+  }, []);
+
   const selectedIndex = useMemo((): string[] => {
     switch (location.pathname) {
       case '/station':
@@ -64,7 +70,7 @@ export default function Dashboard({ children }: Properties) {
           : {
             label: 'Sair',
             key: '1',
-            onClick: () => signOut(),
+            onClick: () => onClickSignOut(),
           },
       ]}
     />
