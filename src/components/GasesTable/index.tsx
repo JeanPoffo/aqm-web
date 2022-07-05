@@ -22,13 +22,13 @@ const columns: ColumnsType<Gas> = [
     title: 'Data Registro',
     dataIndex: 'dateRegister',
     key: 'dateRegisterDate',
-    render: (dateRegister) => new Date(dateRegister).toLocaleDateString(),
+    render: (dateRegister) => new Date(String(dateRegister).substring(0, 19)).toLocaleDateString(),
   },
   {
     title: 'Hora Registro',
     dataIndex: 'dateRegister',
     key: 'dateRegisterHour',
-    render: (dateRegister) => new Date(dateRegister).toLocaleTimeString(),
+    render: (dateRegister) => new Date(String(dateRegister).substring(0, 19)).toLocaleTimeString(),
   },
   {
     title: 'PM2.5',
