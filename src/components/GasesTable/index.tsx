@@ -22,28 +22,31 @@ const columns: ColumnsType<Gas> = [
     title: 'Data Registro',
     dataIndex: 'dateRegister',
     key: 'dateRegisterDate',
-    render: (dateRegister: Date) => new Date(dateRegister).toLocaleDateString(),
+    render: (dateRegister) => new Date(dateRegister).toLocaleDateString(),
   },
   {
     title: 'Hora Registro',
     dataIndex: 'dateRegister',
     key: 'dateRegisterHour',
-    render: (dateRegister: Date) => new Date(dateRegister).toLocaleTimeString(),
+    render: (dateRegister) => new Date(dateRegister).toLocaleTimeString(),
   },
   {
     title: 'PM2.5',
     dataIndex: 'particulateMaterialTwoFive',
     key: 'particulateMaterialTwoFive',
+    render: (particulateMaterialTwoFive) => Number(particulateMaterialTwoFive).toFixed(4),
   },
   {
     title: 'CO',
     dataIndex: 'carbonMonoxide',
     key: 'carbonMonoxide',
+    render: (carbonMonoxide) => Number(carbonMonoxide).toFixed(4),
   },
   {
     title: 'O₃',
     dataIndex: 'ozone',
     key: 'ozone',
+    render: (ozone) => Number(ozone).toFixed(4),
   },
 ];
 

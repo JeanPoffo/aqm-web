@@ -20,25 +20,25 @@ const columns: ColumnsType<Weather> = [
     title: 'Data Registro',
     dataIndex: 'dateRegister',
     key: 'dateRegisterDate',
-    render: (dateRegister: Date) => new Date(dateRegister).toLocaleDateString(),
+    render: (dateRegister) => new Date(dateRegister).toLocaleDateString(),
   },
   {
     title: 'Hora Registro',
     dataIndex: 'dateRegister',
     key: 'dateRegisterHour',
-    render: (dateRegister: Date) => new Date(dateRegister).toLocaleTimeString(),
+    render: (dateRegister) => new Date(dateRegister).toLocaleTimeString(),
   },
   {
     title: 'Temperatura',
     dataIndex: 'temperature',
     key: 'temperature',
-    render: (temperature: number) => `${temperature} °C`,
+    render: (temperature) => `${Number(temperature).toFixed(2)} °C`,
   },
   {
     title: 'Humidade',
     dataIndex: 'humidity',
     key: 'humidity',
-    render: (humidity: number) => `${humidity} %`,
+    render: (humidity) => `${Number(humidity).toFixed(2)} %`,
   },
 ];
 
