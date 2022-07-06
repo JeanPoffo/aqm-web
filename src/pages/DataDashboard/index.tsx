@@ -12,9 +12,10 @@ import {
 import moment, { Moment } from 'moment';
 
 import Dashboard from '../../components/Dashboard';
+import ConamaTable from '../../components/ConamaTable';
 import WeatherTable from '../../components/WeatherTable';
 import GasesTable from '../../components/GasesTable';
-import ConamaTable from '../../components/ConamaTable';
+import GasesGraph from '../../components/GasesGraph';
 import LocationMap from '../../components/LocationMap';
 
 import api from '../../services/api';
@@ -49,11 +50,21 @@ interface Station {
   isActive: boolean;
 }
 
+interface Graph {
+  name: string,
+
+  dateRegister: Date,
+
+  value: number,
+}
+
 interface DataDashoard {
 
   station: Station,
 
   data: Data[],
+
+  graph: Graph[],
 
   conama: {
     particulateMaterialTwoFive: number,
@@ -136,6 +147,7 @@ export default function DataDashboard() {
             longitude,
           },
           data,
+          graph,
           conama: {
             carbonMonoxide,
             ozone,
@@ -147,7 +159,7 @@ export default function DataDashboard() {
 
             <div style={{
               display: 'grid',
-              gridTemplateColumns: '2fr 2fr',
+              gridTemplateColumns: '1fr 2fr 2fr',
               gridColumnGap: '10px',
               gridRowGap: '10px',
             }}
@@ -160,12 +172,26 @@ export default function DataDashboard() {
                   particulateMaterialTwoFive,
                 }]}
               />
-              <LocationMap
-                latitude={latitude}
-                longitude={longitude}
-              />
               <WeatherTable weathers={data} />
               <GasesTable gases={data} />
+              <div style={{ gridColumnStart: 1, gridColumnEnd: 3 }}>
+                <GasesGraph
+                  graphs={graph.filter(({ name: nameType }) => nameType !== 'PM2.5')}
+                  typeValue="ppm"
+                />
+              </div>
+              <div style={{ gridColumn: 3, gridColumnEnd: 5 }}>
+                <GasesGraph
+                  graphs={graph.filter(({ name: nameType }) => nameType === 'PM2.5')}
+                  typeValue="mg/m³"
+                />
+              </div>
+              <div style={{ gridColumnStart: 1, gridColumnEnd: 5 }}>
+                <LocationMap
+                  latitude={latitude}
+                  longitude={longitude}
+                />
+              </div>
             </div>
           </div>
         ))}
