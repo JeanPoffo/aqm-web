@@ -17,16 +17,10 @@ interface Weathers {
 
 const columns: ColumnsType<Weather> = [
   {
-    title: 'Data Registro',
-    dataIndex: 'dateRegister',
-    key: 'dateRegisterDate',
-    render: (dateRegister) => new Date(String(dateRegister).substring(0, 19)).toLocaleDateString(),
-  },
-  {
     title: 'Hora Registro',
     dataIndex: 'dateRegister',
     key: 'dateRegisterHour',
-    render: (dateRegister) => new Date(String(dateRegister).substring(0, 19)).toLocaleTimeString(),
+    render: (dateRegister) => new Date(String(dateRegister)).toLocaleTimeString(),
   },
   {
     title: 'Temperatura',

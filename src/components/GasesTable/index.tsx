@@ -19,31 +19,25 @@ interface Gases {
 
 const columns: ColumnsType<Gas> = [
   {
-    title: 'Data Registro',
-    dataIndex: 'dateRegister',
-    key: 'dateRegisterDate',
-    render: (dateRegister) => new Date(String(dateRegister).substring(0, 19)).toLocaleDateString(),
-  },
-  {
     title: 'Hora Registro',
     dataIndex: 'dateRegister',
     key: 'dateRegisterHour',
-    render: (dateRegister) => new Date(String(dateRegister).substring(0, 19)).toLocaleTimeString(),
+    render: (dateRegister) => new Date(String(dateRegister)).toLocaleTimeString(),
   },
   {
-    title: 'PM2.5',
+    title: 'PM2.5 (mg/m³)',
     dataIndex: 'particulateMaterialTwoFive',
     key: 'particulateMaterialTwoFive',
     render: (particulateMaterialTwoFive) => Number(particulateMaterialTwoFive).toFixed(4),
   },
   {
-    title: 'CO',
+    title: 'CO (ppm)',
     dataIndex: 'carbonMonoxide',
     key: 'carbonMonoxide',
     render: (carbonMonoxide) => Number(carbonMonoxide).toFixed(4),
   },
   {
-    title: 'O₃',
+    title: 'O₃ (ppm)',
     dataIndex: 'ozone',
     key: 'ozone',
     render: (ozone) => Number(ozone).toFixed(4),

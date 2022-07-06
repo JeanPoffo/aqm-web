@@ -79,14 +79,9 @@ export default function DataDashboard() {
   useEffect(() => {
     const params = {
       startDate: moment(date)
-        .hours(0)
-        .minutes(0)
-        .seconds(0)
+        .subtract(1, 'day')
         .toISOString(),
       endDate: moment(date)
-        .hours(23)
-        .minutes(59)
-        .seconds(59)
         .toISOString(),
     };
 
@@ -118,7 +113,8 @@ export default function DataDashboard() {
         <Space>
           Data:
           <DatePicker
-            format="DD/MM/YYYY"
+            showTime={{ format: 'HH:mm' }}
+            format="DD/MM/YYYY HH:mm"
             allowClear={false}
             value={date}
             onChange={setDate}
