@@ -19,10 +19,10 @@ interface Gases {
 
 const columns: ColumnsType<Gas> = [
   {
-    title: 'Hora Registro',
+    title: 'Data do Registro',
     dataIndex: 'dateRegister',
-    key: 'dateRegisterHour',
-    render: (dateRegister) => new Date(String(dateRegister)).toLocaleTimeString(),
+    key: 'dateRegister',
+    render: (dateRegister) => new Date(String(dateRegister)).toLocaleString(),
   },
   {
     title: 'PM2.5 (mg/m³)',

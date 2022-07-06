@@ -172,12 +172,12 @@ export default function DataDashboard() {
 
             <div style={{
               display: 'grid',
-              gridTemplateColumns: '2fr 2fr',
+              gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr',
               gridColumnGap: '10px',
               gridRowGap: '10px',
             }}
             >
-              <div style={{ gridColumnStart: 1, gridColumnEnd: 3 }}>
+              <div style={{ gridColumn: 'span 6' }}>
                 <ConamaTable
                   conamas={[{
                     id: 1,
@@ -187,29 +187,48 @@ export default function DataDashboard() {
                   }]}
                 />
               </div>
-              <WeatherTable weathers={data} />
-              <GasesTable gases={data} />
-              <LineGraph
-                title="Gases"
-                graphs={[...graphs.carbonMonoxide, ...graphs.ozone]}
-                typeValue="ppm"
-              />
-              <LineGraph
-                title="Material Particulado"
-                graphs={[...graphs.particulateMaterialTwoFive]}
-                typeValue="mg/m³"
-              />
-              <LineGraph
-                title="Temperatura"
-                graphs={[...graphs.temperature]}
-                typeValue="°C"
-              />
-              <LineGraph
-                title="Umidade"
-                graphs={[...graphs.humidity]}
-                typeValue="%"
-              />
-              <div style={{ gridColumnStart: 1, gridColumnEnd: 3 }}>
+
+              <div style={{ gridColumn: 'span 3' }}>
+                <WeatherTable weathers={data} />
+              </div>
+
+              <div style={{ gridColumn: 'span 3' }}>
+                <GasesTable gases={data} />
+              </div>
+
+              <div style={{ gridColumn: 'span 3' }}>
+                <LineGraph
+                  title="Gases"
+                  graphs={[...graphs.carbonMonoxide, ...graphs.ozone]}
+                  typeValue="ppm"
+                />
+              </div>
+
+              <div style={{ gridColumn: 'span 3' }}>
+                <LineGraph
+                  title="Material Particulado"
+                  graphs={[...graphs.particulateMaterialTwoFive]}
+                  typeValue="mg/m³"
+                />
+              </div>
+
+              <div style={{ gridColumn: 'span 3' }}>
+                <LineGraph
+                  title="Temperatura"
+                  graphs={[...graphs.temperature]}
+                  typeValue="°C"
+                />
+              </div>
+
+              <div style={{ gridColumn: 'span 3' }}>
+                <LineGraph
+                  title="Umidade"
+                  graphs={[...graphs.humidity]}
+                  typeValue="%"
+                />
+              </div>
+
+              <div style={{ gridColumn: 'span 6' }}>
                 <LocationMap
                   latitude={latitude}
                   longitude={longitude}

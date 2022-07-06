@@ -111,7 +111,7 @@ export default function Dashboard({ children }: Properties) {
         theme="dark"
         style={{
           overflow: 'auto',
-          height: '100vh',
+          height: '100%',
           position: 'fixed',
           zIndex: 3,
           left: 0,
