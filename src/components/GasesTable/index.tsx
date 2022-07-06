@@ -37,7 +37,7 @@ const columns: ColumnsType<Gas> = [
     render: (carbonMonoxide) => Number(carbonMonoxide).toFixed(4),
   },
   {
-    title: 'O₃ (ppm)',
+    title: 'O₃ (mg/m³)',
     dataIndex: 'ozone',
     key: 'ozone',
     render: (ozone) => Number(ozone).toFixed(4),

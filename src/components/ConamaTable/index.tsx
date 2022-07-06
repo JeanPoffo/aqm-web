@@ -17,19 +17,19 @@ interface Conamas {
 
 const columns: ColumnsType<ConamaData> = [
   {
-    title: 'PM2.5',
+    title: 'PM2.5 (mg/m³) (média de 24h)',
     dataIndex: 'particulateMaterialTwoFive',
     key: 'particulateMaterialTwoFive',
     render: (particulateMaterialTwoFive) => Number(particulateMaterialTwoFive).toFixed(4),
   },
   {
-    title: 'CO',
+    title: 'CO (ppm) (média móvel de 8h)',
     dataIndex: 'carbonMonoxide',
     key: 'carbonMonoxide',
     render: (carbonMonoxide) => Number(carbonMonoxide).toFixed(4),
   },
   {
-    title: 'O₃',
+    title: 'O₃ (mg/m³) (média móvel de 8h)',
     dataIndex: 'ozone',
     key: 'ozone',
     render: (ozone) => Number(ozone).toFixed(4),

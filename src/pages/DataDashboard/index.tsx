@@ -15,7 +15,7 @@ import Dashboard from '../../components/Dashboard';
 import ConamaTable from '../../components/ConamaTable';
 import WeatherTable from '../../components/WeatherTable';
 import GasesTable from '../../components/GasesTable';
-import GasesGraph from '../../components/GasesGraph';
+import LineGraph from '../../components/LineGraph';
 import LocationMap from '../../components/LocationMap';
 
 import api from '../../services/api';
@@ -58,13 +58,26 @@ interface Graph {
   value: number,
 }
 
+interface Graphs {
+
+  particulateMaterialTwoFive: Graph[],
+
+  carbonMonoxide: Graph[],
+
+  ozone: Graph[],
+
+  temperature: Graph[],
+
+  humidity: Graph[],
+}
+
 interface DataDashoard {
 
   station: Station,
 
   data: Data[],
 
-  graph: Graph[],
+  graphs: Graphs,
 
   conama: {
     particulateMaterialTwoFive: number,
@@ -147,7 +160,7 @@ export default function DataDashboard() {
             longitude,
           },
           data,
-          graph,
+          graphs,
           conama: {
             carbonMonoxide,
             ozone,
@@ -159,34 +172,44 @@ export default function DataDashboard() {
 
             <div style={{
               display: 'grid',
-              gridTemplateColumns: '1fr 2fr 2fr',
+              gridTemplateColumns: '2fr 2fr',
               gridColumnGap: '10px',
               gridRowGap: '10px',
             }}
             >
-              <ConamaTable
-                conamas={[{
-                  id: 1,
-                  carbonMonoxide,
-                  ozone,
-                  particulateMaterialTwoFive,
-                }]}
-              />
+              <div style={{ gridColumnStart: 1, gridColumnEnd: 3 }}>
+                <ConamaTable
+                  conamas={[{
+                    id: 1,
+                    carbonMonoxide,
+                    ozone,
+                    particulateMaterialTwoFive,
+                  }]}
+                />
+              </div>
               <WeatherTable weathers={data} />
               <GasesTable gases={data} />
+              <LineGraph
+                title="Gases"
+                graphs={[...graphs.carbonMonoxide, ...graphs.ozone]}
+                typeValue="ppm"
+              />
+              <LineGraph
+                title="Material Particulado"
+                graphs={[...graphs.particulateMaterialTwoFive]}
+                typeValue="mg/m³"
+              />
+              <LineGraph
+                title="Temperatura"
+                graphs={[...graphs.temperature]}
+                typeValue="°C"
+              />
+              <LineGraph
+                title="Umidade"
+                graphs={[...graphs.humidity]}
+                typeValue="%"
+              />
               <div style={{ gridColumnStart: 1, gridColumnEnd: 3 }}>
-                <GasesGraph
-                  graphs={graph.filter(({ name: nameType }) => nameType !== 'PM2.5')}
-                  typeValue="ppm"
-                />
-              </div>
-              <div style={{ gridColumn: 3, gridColumnEnd: 5 }}>
-                <GasesGraph
-                  graphs={graph.filter(({ name: nameType }) => nameType === 'PM2.5')}
-                  typeValue="mg/m³"
-                />
-              </div>
-              <div style={{ gridColumnStart: 1, gridColumnEnd: 5 }}>
                 <LocationMap
                   latitude={latitude}
                   longitude={longitude}

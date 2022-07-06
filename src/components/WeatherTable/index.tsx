@@ -29,7 +29,7 @@ const columns: ColumnsType<Weather> = [
     render: (temperature) => `${Number(temperature).toFixed(2)} °C`,
   },
   {
-    title: 'Humidade',
+    title: 'Umidade',
     dataIndex: 'humidity',
     key: 'humidity',
     render: (humidity) => `${Number(humidity).toFixed(2)} %`,
@@ -38,7 +38,7 @@ const columns: ColumnsType<Weather> = [
 
 export default function WeatherTable({ weathers }: Weathers) {
   return (
-    <Card title="Temperatura e Humidade">
+    <Card title="Temperatura e Umidade">
       <Table
         rowKey="id"
         columns={columns}
