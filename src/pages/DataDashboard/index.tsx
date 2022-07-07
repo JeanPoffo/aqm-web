@@ -8,6 +8,7 @@ import {
   Space,
   DatePicker,
   Select,
+  Spin,
 } from 'antd';
 import moment, { Moment } from 'moment';
 
@@ -91,6 +92,7 @@ interface DataDashoard {
 export default function DataDashboard() {
   const [dataDashboard, setDataDashboard] = useState<DataDashoard[]>([]);
   const [date, setDate] = useState<Moment | null>(moment());
+  const [loadinDate, setLoadingDate] = useState<boolean>(false);
   const [stations, setStations] = useState<Station[]>([]);
   const [selectedStation, setSelectedStation] = useState<Station | null>();
 
@@ -101,6 +103,8 @@ export default function DataDashboard() {
   }, []);
 
   useEffect(() => {
+    setLoadingDate(true);
+
     const params = {
       startDate: moment(date)
         .subtract(1, 'day')
@@ -115,7 +119,7 @@ export default function DataDashboard() {
 
     api.get<DataDashoard[]>('dashboard', { params }).then((response) => {
       setDataDashboard(response.data);
-    });
+    }).finally(() => setLoadingDate(false));
   }, [date, selectedStation]);
 
   const onChangeSelectStation = useCallback((id: string) => {
@@ -131,7 +135,10 @@ export default function DataDashboard() {
   return (
     <Dashboard>
       <div style={{
-        display: 'flex', alignContent: 'center', justifyContent: 'center', flexDirection: 'column',
+        display: 'flex',
+        alignContent: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
       }}
       >
         <Space>
@@ -150,6 +157,7 @@ export default function DataDashboard() {
               <Option key={actualStation.id} value={actualStation.id}>{actualStation.name}</Option>
             ))}
           </Select>
+          <Spin size="small" spinning={loadinDate} style={{ marginLeft: '10px' }} />
         </Space>
 
         {dataDashboard.length > 0 && dataDashboard.map(({
