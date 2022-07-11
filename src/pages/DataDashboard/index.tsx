@@ -206,16 +206,16 @@ export default function DataDashboard() {
 
               <div style={{ gridColumn: 'span 3' }}>
                 <LineGraph
-                  title="Gases"
-                  graphs={[...graphs.carbonMonoxide, ...graphs.ozone]}
+                  title="Gases (ppm)"
+                  graphs={[...graphs.carbonMonoxide]}
                   typeValue="ppm"
                 />
               </div>
 
               <div style={{ gridColumn: 'span 3' }}>
                 <LineGraph
-                  title="Material Particulado"
-                  graphs={[...graphs.particulateMaterialTwoFive]}
+                  title="Gases e Material Particulado (mg/m³)"
+                  graphs={[...graphs.particulateMaterialTwoFive, ...graphs.ozone]}
                   typeValue="mg/m³"
                 />
               </div>
