@@ -1,6 +1,15 @@
-import { useState, useEffect, useCallback } from 'react';
 import {
-  Button, Divider, Space, Table, Tag,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
+import {
+  Button,
+  Divider,
+  Space,
+  Table,
+  Tag,
+  Popconfirm,
 } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 
@@ -22,34 +31,6 @@ interface Station {
   isActive: boolean;
 }
 
-const columns: ColumnsType<Station> = [
-  {
-    title: 'Nome',
-    dataIndex: 'name',
-    key: 'carbonMonoxide',
-  },
-  {
-    title: 'Latitude',
-    dataIndex: 'latitude',
-    key: 'latitude',
-  },
-  {
-    title: 'Longitude',
-    dataIndex: 'longitude',
-    key: 'longitude',
-  },
-  {
-    title: 'Ativo?',
-    dataIndex: 'isActive',
-    key: 'isActive',
-    render: (_, { isActive }) => (
-      <Tag color={isActive ? 'green' : 'red'}>
-        {isActive ? 'Sim' : 'Não'}
-      </Tag>
-    ),
-  },
-];
-
 export default function DataDashboard() {
   const [stations, setStations] = useState<Station[]>([]);
   const [showStation, setShowStation] = useState<boolean>(false);
@@ -60,9 +41,60 @@ export default function DataDashboard() {
     });
   }, []);
 
+  const deleteStation = useCallback((id: String) => {
+    api.delete(`station/${id}`).then(() => {
+      updateStations();
+    });
+  }, []);
+
   useEffect(() => {
     updateStations();
   }, []);
+
+  const columns: ColumnsType<Station> = [
+    {
+      title: 'Nome',
+      dataIndex: 'name',
+      key: 'carbonMonoxide',
+    },
+    {
+      title: 'Latitude',
+      dataIndex: 'latitude',
+      key: 'latitude',
+    },
+    {
+      title: 'Longitude',
+      dataIndex: 'longitude',
+      key: 'longitude',
+    },
+    {
+      title: 'Ativo?',
+      dataIndex: 'isActive',
+      key: 'isActive',
+      render: (_, { isActive }) => (
+        <Tag color={isActive ? 'green' : 'red'}>
+          {isActive ? 'Sim' : 'Não'}
+        </Tag>
+      ),
+    },
+    {
+      title: 'Ações',
+      key: 'action',
+      render: (_, { id }) => (
+        <Space size="middle">
+          <Popconfirm
+            title="Você realmente quer excluir esta estação?"
+            onConfirm={() => deleteStation(id)}
+            okText="Sim"
+            cancelText="Não"
+          >
+            <Button type="primary" danger>Excluir</Button>
+          </Popconfirm>
+
+        </Space>
+      ),
+    },
+  ];
 
   return (
     <Dashboard>
